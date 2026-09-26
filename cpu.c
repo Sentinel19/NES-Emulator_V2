@@ -209,6 +209,30 @@ void cpu_cycle(CPU_6502* cpu) {
                     cpu->reg_file.status |= 1;
                     state = 0;
                     break;
+                case SED:
+                    cpu->reg_file.status |= 8;
+                    state = 0;
+                    break;
+                case SEI:
+                    cpu->reg_file.status |= 4;
+                    state = 0;
+                    break;
+                case CLC:
+                    cpu->reg_file.status &= 0xFE;
+                    state = 0;
+                    break;
+                case CLD:
+                    cpu->reg_file.status &= 0xF7;
+                    state = 0;
+                    break;
+                case CLI:
+                    cpu->reg_file.status &= 0xFB;
+                    state = 0;
+                    break;
+                case CLV:
+                    cpu->reg_file.status &= 0xBF;
+                    state = 0;
+                    break;
                 default:
                     break;
             }
