@@ -55,8 +55,11 @@
 #define TYA 0x98 // implied
 
 // Stack Instructions
+#define PHA 0x48 // implied
+#define PLA 0x68 // implied
+#define PHP 0x08 // implied
+#define PLP 0x28 // implied
 #define TSX 0xBA // implied
-
 #define TXS 0x9A // implied
 
 
@@ -84,8 +87,7 @@
 #define ROL_AC 0x2A // accumulator
 #define ROR_AC 0x6A // accumulator
 
-// Misc
-#define NOP 0xEA // implied
+// Flag Instructions
 #define SEC 0x38 // implied
 #define CLC 0x18 // implied
 #define CLD 0xD8 // implied
@@ -93,6 +95,10 @@
 #define CLV 0xB8 // implied
 #define SED 0xF8 // implied
 #define SEI 0x78 // implied
+
+// Misc
+#define NOP 0xEA // implied
+
 
 // public struct definitions
 typedef struct {

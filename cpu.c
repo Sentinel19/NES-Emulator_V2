@@ -77,7 +77,7 @@ void cpu_cycle(CPU_6502* cpu) {
     static unsigned char opcode;
     static unsigned char l_addr;
     static unsigned char temp;
-
+    static unsigned short int addr;
 
     switch (state) {
         case 0: // read opcode (executes 1 cycle in the process)
@@ -233,6 +233,22 @@ void cpu_cycle(CPU_6502* cpu) {
                     cpu->reg_file.status &= 0xBF;
                     state = 0;
                     break;
+                case PHA:
+                    addr = 0x0100 + cpu->reg_file.sp;
+                    cpu->reg_file.sp--;
+                    state++;
+                    break;
+                case PHP:
+                    addr = 0x0100 + cpu->reg_file.sp;
+                    cpu->reg_file.sp--;
+                    state++;
+                    break;
+                case PLA:
+                    state++;
+                    break;
+                case NOP:
+                    state = 0;
+                    break;
                 default:
                     break;
             }
@@ -253,7 +269,13 @@ void cpu_cycle(CPU_6502* cpu) {
                         cpu->reg_file.pc++;
                         state = 0;
                         break;
-                    case NOP:
+                    case PHA:
+                        cpu->ram.mem[addr] = cpu->reg_file.a;
+                        cpu->reg_file.pc++;
+                        state = 0;
+                        break;
+                    case PHP:
+                        cpu->ram.mem[addr] = cpu->reg_file.status;
                         cpu->reg_file.pc++;
                         state = 0;
                         break;

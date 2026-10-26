@@ -23,8 +23,9 @@ int main(){
     cpu.rom.mem[7] = SEI;
     cpu.rom.mem[8] = CLI;
     cpu.rom.mem[9] = CLD;
+    cpu.rom.mem[10] = PHP;
 
-    int bytes = 9;
+    int bytes = 10;
     while(cpu.reg_file.pc <= bytes + 1) {
         cpu_cycle(&cpu);
     }
